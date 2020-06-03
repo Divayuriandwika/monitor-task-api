@@ -26,8 +26,8 @@ module.exports = {
             const { fullname, email, password } = req.body;
 
             // // Check if email has already registered
-			// const result = await User.findOne({ email: email });
-			// if (result) return res.status(401).send('Your email has already registered');
+			const result = await User.findOne({ email: email });
+			if (result) return res.status(401).send('Your email has already registered');
 
             const users = await User.create({
                 fullname, 
