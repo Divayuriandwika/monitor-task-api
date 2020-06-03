@@ -70,7 +70,10 @@ module.exports = {
             // });
 
             if(password === users.password) {
-                res.status(200).send({ message: 'login success', data: users.id});
+                // if(users.role === 'manager'){
+                //     res.status(200).send({ message: 'login success', id: users.id, role: users.role});
+                // }
+                res.status(200).send({ message: 'login success', id: users.id, role: users.role});
             } else {
                 res.status(401).send({
                     message: "Your are not allowed to enter this api",
