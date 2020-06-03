@@ -23,7 +23,7 @@ module.exports = {
 	// },
     create: async (req, res) => {
         try {
-            const { fullname, email, password } = req.body;
+            const { fullname, email, password, role} = req.body;
 
             // // Check if email has already registered
 			const result = await User.findOne({ email: email });
@@ -33,6 +33,7 @@ module.exports = {
                 fullname, 
                 email, 
                 password,
+                role,
             });
 
             res.status(201).json({
