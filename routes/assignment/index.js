@@ -5,7 +5,7 @@ const { getAll, create, edit, deleteByID } = require('./controller');
 
 router.get('/', getAll);
 router.post('/', create);
-router.put("/:id", edit);
-router.delete("/:id", deleteByID);
+router.put('/:id', edit);
+router.delete('/:id', deleteByID);
 
 module.exports = router;

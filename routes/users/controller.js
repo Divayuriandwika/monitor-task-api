@@ -2,6 +2,7 @@ const { User } = require('../../models');
 
 
 module.exports = {
+
 	getAll: async (req, res) => {
 		try {
 			const users = await User.find({});
@@ -11,16 +12,21 @@ module.exports = {
 			console.log(error);
 		}
     },
-    // getUserById: async (req, res) => {
-	// 	try {
-	// 		const id = req.user._id;
-	// 		const status = req.user.isLoggedIn;
-	// 		const user = await User.findById(id);
-	// 		res.status(200).json({ currentUser: user, isLoggedIn: status });
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// },
+
+    findByID: async (req, res) => {
+            try {
+        const { id } = req.params;
+
+        const resultByID = await User.findById(id)
+        res.status(200).json({
+            message: `Get data By UserID: ${id}`,
+            data: resultByID,
+        });
+    } catch (error) {
+        console.log(error)
+    }
+    },
+    
     create: async (req, res) => {
         try {
             const { fullname, email, password, role} = req.body;
@@ -44,6 +50,7 @@ module.exports = {
             console.log(error);
         }
     },
+
     login: async (req, res) => {
         try {
             const { email, password } = req.body;
@@ -52,27 +59,8 @@ module.exports = {
 
             // guard clause
             if(!users) return res.status(401).send("your email is not registered")
-            
-            // const { _id } = result;
-
-            // bcrypt.compare(password, result.password).then((response) => {
-            //     if (response === true) {
-            //         const token = jwt.sign({ _id }, SECRET_KEY, {
-            //             expiresIn: "1h",
-            //         });
-
-            //         res.status(200).send({ token: token });
-            //     } else {
-            //         res.status(401).send({
-            //             message: "Your are not allowed to enter this api",
-            //         });
-            //     }
-            // });
 
             if(password === users.password) {
-                // if(users.role === 'manager'){
-                //     res.status(200).send({ message: 'login success', id: users.id, role: users.role});
-                // }
                 res.status(200).send({ message: 'login success', id: users.id, role: users.role});
             } else {
                 res.status(401).send({
