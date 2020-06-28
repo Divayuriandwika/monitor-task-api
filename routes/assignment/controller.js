@@ -31,6 +31,22 @@ module.exports = {
             console.log(error);
         }
     },
+
+
+        findByID: async (req, res) => {
+            try {
+        const { id } = req.params;
+
+        const resultByID = await Task.findById(id)
+        res.status(200).json({
+            message: `Get assignment By taskID: ${id}`,
+            data: resultByID,
+        });
+    } catch (error) {
+        console.log(error)
+    }
+    },
+
     edit: async (req, res) => {
         try {
             const { id } = req.params;
@@ -61,15 +77,15 @@ module.exports = {
             console.log(error);
         }
     },
-    deleteByID: async (req, res) => {
+    deleteTask: async (req, res) => {
         try {
             const { id } = req.params;
 
-            const result = await Task.findByIdAndRemove(id);
+            const deleteTask = await Task.findByIdAndDelete(id);
 
             res.status(200).json({
-                message: `Movie with id : ${id} is successfully deleted`,
-                data: result,
+                message: `Task with id : ${id} is successfully deleted`,
+                data: deleteTask,
             });
         } catch (error) {
             console.log(error);
