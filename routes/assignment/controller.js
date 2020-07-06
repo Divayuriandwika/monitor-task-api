@@ -61,7 +61,7 @@ module.exports = {
 
             const result = await Task.findByIdAndUpdate(id, {
                 $set: {
-                    ...edited,
+                    ...edited
                 },
             }, {
                 new:true
@@ -70,7 +70,7 @@ module.exports = {
 
 
             res.status(200).json({
-                message: `Edit movie with id : ${id} is successfully`,
+                message: `Edit task with id : ${id} is successfully`,
                 data: result,
             });
         } catch (error) {
